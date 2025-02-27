@@ -1,100 +1,60 @@
 <ScrapedData>
-  <url>https://www.google.com/</url>
+  <url>https://www.youtube.com/</url>
   <timestamp>0001-01-01T00:00:00Z</timestamp>
   <links>
-    <text>Images</text>
-    <url>https://www.google.com/imghp?hl=en&amp;tab=wi</url>
+    <text></text>
+    <url>/</url>
   </links>
   <links>
-    <text>Maps</text>
-    <url>https://maps.google.co.za/maps?hl=en&amp;tab=wl</url>
+    <text></text>
+    <url>/</url>
   </links>
   <links>
-    <text>Play</text>
-    <url>https://play.google.com/?hl=en&amp;tab=w8</url>
+    <text>About</text>
+    <url>https://www.youtube.com/about/</url>
   </links>
   <links>
-    <text>YouTube</text>
-    <url>https://www.youtube.com/?tab=w1</url>
+    <text>Press</text>
+    <url>https://www.youtube.com/about/press/</url>
   </links>
   <links>
-    <text>News</text>
-    <url>https://news.google.com/?tab=wn</url>
+    <text>Copyright</text>
+    <url>https://www.youtube.com/about/copyright/</url>
   </links>
   <links>
-    <text>Gmail</text>
-    <url>https://mail.google.com/mail/?tab=wm</url>
+    <text>Contact us</text>
+    <url>/t/contact_us/</url>
   </links>
   <links>
-    <text>Drive</text>
-    <url>https://drive.google.com/?tab=wo</url>
+    <text>Creator</text>
+    <url>https://www.youtube.com/creators/</url>
   </links>
   <links>
-    <text>More »</text>
-    <url>https://www.google.co.za/intl/en/about/products?tab=wh</url>
+    <text>Advertise</text>
+    <url>https://www.youtube.com/ads/</url>
   </links>
   <links>
-    <text>Web History</text>
-    <url>http://www.google.co.za/history/optout?hl=en</url>
-  </links>
-  <links>
-    <text>Settings</text>
-    <url>/preferences?hl=en</url>
-  </links>
-  <links>
-    <text>Sign in</text>
-    <url>https://accounts.google.com/ServiceLogin?hl=en&amp;passive=true&amp;continue=https://www.google.com/&amp;ec=GAZAAQ</url>
-  </links>
-  <links>
-    <text>Advanced search</text>
-    <url>/advanced_search?hl=en-ZA&amp;authuser=0</url>
-  </links>
-  <links>
-    <text>Afrikaans</text>
-    <url>https://www.google.com/setprefs?sig=0_PhvRiDHlYZYcDED46ex1TNGkjUw%3D&amp;hl=af&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwiitMKqk-SLAxX-slYBHe3ALokQ2ZgBCAY</url>
-  </links>
-  <links>
-    <text>Sesotho</text>
-    <url>https://www.google.com/setprefs?sig=0_PhvRiDHlYZYcDED46ex1TNGkjUw%3D&amp;hl=st&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwiitMKqk-SLAxX-slYBHe3ALokQ2ZgBCAc</url>
-  </links>
-  <links>
-    <text>isiZulu</text>
-    <url>https://www.google.com/setprefs?sig=0_PhvRiDHlYZYcDED46ex1TNGkjUw%3D&amp;hl=zu&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwiitMKqk-SLAxX-slYBHe3ALokQ2ZgBCAg</url>
-  </links>
-  <links>
-    <text>IsiXhosa</text>
-    <url>https://www.google.com/setprefs?sig=0_PhvRiDHlYZYcDED46ex1TNGkjUw%3D&amp;hl=xh&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwiitMKqk-SLAxX-slYBHe3ALokQ2ZgBCAk</url>
-  </links>
-  <links>
-    <text>Setswana</text>
-    <url>https://www.google.com/setprefs?sig=0_PhvRiDHlYZYcDED46ex1TNGkjUw%3D&amp;hl=tn&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwiitMKqk-SLAxX-slYBHe3ALokQ2ZgBCAo</url>
-  </links>
-  <links>
-    <text>Northern Sotho</text>
-    <url>https://www.google.com/setprefs?sig=0_PhvRiDHlYZYcDED46ex1TNGkjUw%3D&amp;hl=nso&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwiitMKqk-SLAxX-slYBHe3ALokQ2ZgBCAs</url>
-  </links>
-  <links>
-    <text>Advertising</text>
-    <url>/intl/en/ads/</url>
-  </links>
-  <links>
-    <text>Business Solutions</text>
-    <url>http://www.google.co.za/intl/en/services/</url>
-  </links>
-  <links>
-    <text>About Google</text>
-    <url>/intl/en/about.html</url>
-  </links>
-  <links>
-    <text>Google.co.za</text>
-    <url>https://www.google.com/setprefdomain?prefdom=ZA&amp;prev=https://www.google.co.za/&amp;sig=K_pLSVlPL8HdVNXT7XUrxlgjGZ5Ao%3D</url>
-  </links>
-  <links>
-    <text>Privacy</text>
-    <url>/intl/en/policies/privacy/</url>
+    <text>Developers</text>
+    <url>https://developers.google.com/youtube</url>
   </links>
   <links>
     <text>Terms</text>
-    <url>/intl/en/policies/terms/</url>
+    <url>/t/terms</url>
+  </links>
+  <links>
+    <text>Privacy</text>
+    <url>/t/privacy</url>
+  </links>
+  <links>
+    <text>Policy &amp; Safety</text>
+    <url>https://www.youtube.com/about/policies/</url>
+  </links>
+  <links>
+    <text>How YouTube works</text>
+    <url>https://www.youtube.com/howyoutubeworks?utm_campaign=ytgen&amp;utm_source=ythp&amp;utm_medium=LeftNav&amp;utm_content=txt&amp;u=https%3A%2F%2Fwww.youtube.com%2Fhowyoutubeworks%3Futm_source%3Dythp%26utm_medium%3DLeftNav%26utm_campaign%3Dytgen</url>
+  </links>
+  <links>
+    <text>Test new features</text>
+    <url>/new</url>
   </links>
 </ScrapedData>
