@@ -1,0 +1,98 @@
+url = "https://www.google.com/"
+timestamp = 2025-02-27T17:11:19.7080116+02:00
+
+[[links]]
+  text = "Images"
+  url = "https://www.google.com/imghp?hl=en&tab=wi"
+
+[[links]]
+  text = "Maps"
+  url = "https://maps.google.co.za/maps?hl=en&tab=wl"
+
+[[links]]
+  text = "Play"
+  url = "https://play.google.com/?hl=en&tab=w8"
+
+[[links]]
+  text = "YouTube"
+  url = "https://www.youtube.com/?tab=w1"
+
+[[links]]
+  text = "News"
+  url = "https://news.google.com/?tab=wn"
+
+[[links]]
+  text = "Gmail"
+  url = "https://mail.google.com/mail/?tab=wm"
+
+[[links]]
+  text = "Drive"
+  url = "https://drive.google.com/?tab=wo"
+
+[[links]]
+  text = "More »"
+  url = "https://www.google.co.za/intl/en/about/products?tab=wh"
+
+[[links]]
+  text = "Web History"
+  url = "http://www.google.co.za/history/optout?hl=en"
+
+[[links]]
+  text = "Settings"
+  url = "/preferences?hl=en"
+
+[[links]]
+  text = "Sign in"
+  url = "https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/&ec=GAZAAQ"
+
+[[links]]
+  text = "Advanced search"
+  url = "/advanced_search?hl=en-ZA&authuser=0"
+
+[[links]]
+  text = "Afrikaans"
+  url = "https://www.google.com/setprefs?sig=0_lELVQPtVJvCGpp6u8ETLauWoZoU%3D&hl=af&source=homepage&sa=X&ved=0ahUKEwjtmbHSkeSLAxW3hlYBHWFxFL8Q2ZgBCAY"
+
+[[links]]
+  text = "Sesotho"
+  url = "https://www.google.com/setprefs?sig=0_lELVQPtVJvCGpp6u8ETLauWoZoU%3D&hl=st&source=homepage&sa=X&ved=0ahUKEwjtmbHSkeSLAxW3hlYBHWFxFL8Q2ZgBCAc"
+
+[[links]]
+  text = "isiZulu"
+  url = "https://www.google.com/setprefs?sig=0_lELVQPtVJvCGpp6u8ETLauWoZoU%3D&hl=zu&source=homepage&sa=X&ved=0ahUKEwjtmbHSkeSLAxW3hlYBHWFxFL8Q2ZgBCAg"
+
+[[links]]
+  text = "IsiXhosa"
+  url = "https://www.google.com/setprefs?sig=0_lELVQPtVJvCGpp6u8ETLauWoZoU%3D&hl=xh&source=homepage&sa=X&ved=0ahUKEwjtmbHSkeSLAxW3hlYBHWFxFL8Q2ZgBCAk"
+
+[[links]]
+  text = "Setswana"
+  url = "https://www.google.com/setprefs?sig=0_lELVQPtVJvCGpp6u8ETLauWoZoU%3D&hl=tn&source=homepage&sa=X&ved=0ahUKEwjtmbHSkeSLAxW3hlYBHWFxFL8Q2ZgBCAo"
+
+[[links]]
+  text = "Northern Sotho"
+  url = "https://www.google.com/setprefs?sig=0_lELVQPtVJvCGpp6u8ETLauWoZoU%3D&hl=nso&source=homepage&sa=X&ved=0ahUKEwjtmbHSkeSLAxW3hlYBHWFxFL8Q2ZgBCAs"
+
+[[links]]
+  text = "Advertising"
+  url = "/intl/en/ads/"
+
+[[links]]
+  text = "Business Solutions"
+  url = "http://www.google.co.za/intl/en/services/"
+
+[[links]]
+  text = "About Google"
+  url = "/intl/en/about.html"
+
+[[links]]
+  text = "Google.co.za"
+  url = "https://www.google.com/setprefdomain?prefdom=ZA&prev=https://www.google.co.za/&sig=K_kKmeP0RZHgr7MZs0wit5QfJ9sqc%3D"
+
+[[links]]
+  text = "Privacy"
+  url = "/intl/en/policies/privacy/"
+
+[[links]]
+  text = "Terms"
+  url = "/intl/en/policies/terms/"
