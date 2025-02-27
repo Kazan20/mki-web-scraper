@@ -2,13 +2,27 @@ package main
 
 import (
 	"bufio"
+	"encoding/xml"
 	"fmt"
 	"log"
 	"os"
 	"strings"
+	"time"
 
+	"github.com/BurntSushi/toml"
 	"github.com/gocolly/colly/v2"
 )
+
+type ScrapedData struct {
+	URL       string    `xml:"url" toml:"url"`
+	Timestamp time.Time `xml:"timestamp" toml:"timestamp"`
+	Links     []Link    `xml:"links" toml:"links"`
+}
+
+type Link struct {
+	Text string `xml:"text" toml:"text"`
+	URL  string `xml:"url" toml:"url"`
+}
 
 func main() {
 	// Get URL from user
@@ -20,28 +34,67 @@ func main() {
 	}
 	userURL = strings.TrimSpace(userURL)
 
-	// Create a new collector
+	// Get format preference
+	fmt.Print("Choose output format (xml/toml): ")
+	format, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatal("Error reading input:", err)
+	}
+	format = strings.ToLower(strings.TrimSpace(format))
+
+	if format != "xml" && format != "toml" {
+		log.Fatal("Invalid format. Please choose 'xml' or 'toml'")
+	}
+
+	data := &ScrapedData{
+		URL:       userURL,
+		Timestamp: time.Now(),
+		Links:     make([]Link, 0),
+	}
+
 	c := colly.NewCollector()
 
-	// On every a element which has href attribute call callback
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
 		link := e.Attr("href")
+		data.Links = append(data.Links, Link{
+			Text: e.Text,
+			URL:  link,
+		})
 		fmt.Printf("Link found: %q -> %s\n", e.Text, link)
 	})
 
-	// Before making a request print "Visiting ..."
 	c.OnRequest(func(r *colly.Request) {
 		fmt.Println("Visiting", r.URL.String())
 	})
 
-	// Print if error occurs
 	c.OnError(func(r *colly.Response, err error) {
 		log.Printf("Error while scraping: %v\n", err)
 	})
 
-	// Start scraping
 	err = c.Visit(userURL)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Save the data
+	filename := fmt.Sprintf("scrape_result.%s", format)
+	file, err := os.Create(filename)
+	if err != nil {
+		log.Fatal("Error creating file:", err)
+	}
+	defer file.Close()
+
+	if format == "xml" {
+		encoder := xml.NewEncoder(file)
+		encoder.Indent("", "  ")
+		if err := encoder.Encode(data); err != nil {
+			log.Fatal("Error encoding XML:", err)
+		}
+	} else {
+		if err := toml.NewEncoder(file).Encode(data); err != nil {
+			log.Fatal("Error encoding TOML:", err)
+		}
+	}
+
+	fmt.Printf("Results saved to %s\n", filename)
 }
