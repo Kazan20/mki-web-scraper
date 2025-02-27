@@ -1,15 +1,15 @@
 package main
 
 import (
-	"bufio"
 	"encoding/xml"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 	"time"
 
 	"github.com/BurntSushi/toml"
+	"github.com/charmbracelet/bubbles/textinput"
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/gocolly/colly/v2"
 )
 
@@ -24,77 +24,149 @@ type Link struct {
 	URL  string `xml:"url" toml:"url"`
 }
 
-func main() {
-	// Get URL from user
-	fmt.Print("Enter the URL to scrape: ")
-	reader := bufio.NewReader(os.Stdin)
-	userURL, err := reader.ReadString('\n')
-	if err != nil {
-		log.Fatal("Error reading input:", err)
-	}
-	userURL = strings.TrimSpace(userURL)
+type model struct {
+	urlInput    textinput.Model
+	formatInput textinput.Model
+	step        int
+	data        *ScrapedData
+	done        bool
+	err         error
+}
 
-	// Get format preference
-	fmt.Print("Choose output format (xml/toml): ")
-	format, err := reader.ReadString('\n')
-	if err != nil {
-		log.Fatal("Error reading input:", err)
-	}
-	format = strings.ToLower(strings.TrimSpace(format))
+func initialModel() model {
+	urlInput := textinput.New()
+	urlInput.Placeholder = "Enter URL to scrape"
+	urlInput.Focus()
 
-	if format != "xml" && format != "toml" {
-		log.Fatal("Invalid format. Please choose 'xml' or 'toml'")
+	formatInput := textinput.New()
+	formatInput.Placeholder = "xml or toml"
+
+	return model{
+		urlInput:    urlInput,
+		formatInput: formatInput,
+		step:        0,
+		data:        nil,
+		done:        false,
+	}
+}
+
+func (m model) Init() tea.Cmd {
+	return textinput.Blink
+}
+
+func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+	var cmd tea.Cmd
+
+	switch msg := msg.(type) {
+	case tea.KeyMsg:
+		switch msg.Type {
+		case tea.KeyEnter:
+			if m.step == 0 {
+				m.step++
+				m.urlInput.Blur()
+				m.formatInput.Focus()
+				return m, nil
+			}
+			if m.step == 1 {
+				format := strings.ToLower(strings.TrimSpace(m.formatInput.Value()))
+				if format != "xml" && format != "toml" {
+					m.err = fmt.Errorf("invalid format. Please choose 'xml' or 'toml'")
+					return m, nil
+				}
+				m.formatInput.Blur()
+				go m.scrapeAndSave()
+				m.step++
+			}
+		case tea.KeyCtrlC:
+			return m, tea.Quit
+		}
 	}
 
-	data := &ScrapedData{
-		URL:       userURL,
-		Timestamp: time.Now(),
-		Links:     make([]Link, 0),
+	if m.step == 0 {
+		m.urlInput, cmd = m.urlInput.Update(msg)
+	} else if m.step == 1 {
+		m.formatInput, cmd = m.formatInput.Update(msg)
+	}
+
+	return m, cmd
+}
+
+func (m model) View() string {
+	if m.err != nil {
+		return fmt.Sprintf("Error: %v\nPress Ctrl+C to quit\n", m.err)
+	}
+
+	if m.done {
+		return "Scraping completed! Results saved to file.\nPress Ctrl+C to quit\n"
+	}
+
+	var s string
+	switch m.step {
+	case 0:
+		s = fmt.Sprintf("Enter URL to scrape:\n%s\n", m.urlInput.View())
+	case 1:
+		s = fmt.Sprintf("URL: %s\nChoose format (xml/toml):\n%s\n", m.urlInput.Value(), m.formatInput.View())
+	case 2:
+		s = "Scraping in progress...\n"
+	}
+
+	s += "\nPress Ctrl+C to quit\n"
+	return s
+}
+
+func (m *model) scrapeAndSave() {
+	url := strings.TrimSpace(m.urlInput.Value())
+	format := strings.ToLower(strings.TrimSpace(m.formatInput.Value()))
+
+	m.data = &ScrapedData{
+		URL:   url,
+		Links: make([]Link, 0),
 	}
 
 	c := colly.NewCollector()
 
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
 		link := e.Attr("href")
-		data.Links = append(data.Links, Link{
+		m.data.Links = append(m.data.Links, Link{
 			Text: e.Text,
 			URL:  link,
 		})
-		fmt.Printf("Link found: %q -> %s\n", e.Text, link)
 	})
 
-	c.OnRequest(func(r *colly.Request) {
-		fmt.Println("Visiting", r.URL.String())
-	})
-
-	c.OnError(func(r *colly.Response, err error) {
-		log.Printf("Error while scraping: %v\n", err)
-	})
-
-	err = c.Visit(userURL)
-	if err != nil {
-		log.Fatal(err)
+	if err := c.Visit(url); err != nil {
+		m.err = err
+		return
 	}
 
-	// Save the data
 	filename := fmt.Sprintf("scrape_result.%s", format)
 	file, err := os.Create(filename)
 	if err != nil {
-		log.Fatal("Error creating file:", err)
+		m.err = err
+		return
 	}
 	defer file.Close()
 
 	if format == "xml" {
 		encoder := xml.NewEncoder(file)
 		encoder.Indent("", "  ")
-		if err := encoder.Encode(data); err != nil {
-			log.Fatal("Error encoding XML:", err)
+		if err := encoder.Encode(m.data); err != nil {
+			m.err = err
+			return
 		}
 	} else {
-		if err := toml.NewEncoder(file).Encode(data); err != nil {
-			log.Fatal("Error encoding TOML:", err)
+		if err := toml.NewEncoder(file).Encode(m.data); err != nil {
+			m.err = err
+			return
 		}
 	}
 
-	fmt.Printf("Results saved to %s\n", filename)
+	m.done = true
+}
+
+func main() {
+	p := tea.NewProgram(initialModel())
+	if _, err := p.Run(); err != nil {
+		fmt.Printf("Error running program: %v\n", err)
+		os.Exit(1)
+	}
 }
